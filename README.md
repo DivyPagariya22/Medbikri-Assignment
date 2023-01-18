@@ -23,6 +23,7 @@ This project uses the following environment variables:
 # Pre-requisites
 - Install [Node.js]
 - Install nodemon too
+- Install Postgresql
 
 # Getting started
 - Clone the repository
@@ -42,6 +43,6 @@ npm start
 
 - API Document endpoints
 
-  Fetching All Videos Endpoint : http://localhost:8001/getVideos
+  Fetching All Videos Endpoint : http://localhost:5000/getVideos
 
-  Fetching Videos by Title  Endpoint : http://localhost:8001/videoByTitle?title=<Your_Title>
+  Fetching Videos by Title  Endpoint : http://localhost:5000/videoByTitle?title=<Your_Title>
