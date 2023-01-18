@@ -1,23 +1,16 @@
 import axios from "axios";
 import { createVideoItem } from "../db/query.js";
-
-// I am not storing Variables in env as it can create problem when someone will pull this project in their local Machine
-
-// Variables which should be put in env files
-/*
-URL of YT search
-YT API Keys
-*/
+import dotenv from "dotenv";
+dotenv.config();
 
 let i = 0;
 // URL for getting Data from YouTube
-const URL =
-  "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&order=date&";
+const URL = process.env.URL;
 
 const keys = [
-  "AIzaSyCDEn9N-y-1qhnCfcSLWTpqzGv6pSa8iYg",
-  "AIzaSyCf6LlHIqoXohfTSTS4FW8PhJx0EyQex9w",
-  "AIzaSyAl7UY70_el3QIz3dioCyuIrasW6hcLMdc",
+  process.env.API_KEY_1,
+  process.env.API_KEY_2,
+  process.env.API_KEY_3,
 ];
 
 // Just for Testing
@@ -31,7 +24,7 @@ export const fetchVideo = async (title) => {
   // Axios API call
   const response = await axios(url);
   const data = response.data.items;
-  // console.log(data);
+  console.log(data);
   // If data i snot fetched due to request limit then try another API Keys.
   if (!data) {
     if (i < keys.length) {

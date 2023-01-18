@@ -1,12 +1,14 @@
 import pg from "pg";
 const { Pool } = pg;
+import dotenv from "dotenv";
+dotenv.config();
 
 // Details to connect with PostgreSQL Database.
 const pool = new Pool({
   user: "me",
   host: "localhost",
-  database: "api",
-  password: "divy",
+  database: process.env.DATABASE_NAME,
+  password: process.env.Password,
   port: 5432,
 });
 
