@@ -24,7 +24,7 @@ export const fetchVideo = async (title) => {
   // Axios API call
   const response = await axios(url);
   const data = response.data.items;
-  console.log(data);
+  //console.log(data);
   // If data i snot fetched due to request limit then try another API Keys.
   if (!data) {
     if (i < keys.length) {
@@ -54,4 +54,18 @@ const readInDatabase = async (data) => {
       createVideoItem(id, title, description, publishTime, thumbnail);
     }
   });
+};
+
+export const sortThemByFrequency = (data) => {
+  let map = {};
+  data.map((item) => {
+    let str = item.title.split(" ");
+    str.forEach((word) => (map[word] ? map[word]++ : (map[word] = 1)));
+  });
+
+  let keyVals = Object.entries(map);
+  let sortedNestedArray = keyVals.sort((a, b) => a[1] - b[1]);
+  let resultArray = sortedNestedArray.reverse();
+  resultArray = resultArray.slice(0, 10);
+  return resultArray;
 };

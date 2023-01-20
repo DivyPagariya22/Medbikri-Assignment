@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 
 import cors from "cors";
 import { fetchVideo } from "./controller/video.js";
-import { getVideoByTitle, getVideos } from "./db/query.js";
+import { getVideoByTitle, getVideos, getFreq } from "./db/query.js";
 import cron from "node-cron";
 
 // Cron Job to Schedule Fetching Videos every Minute
@@ -36,3 +36,5 @@ app.get("/getVideos", getVideos);
 
 // API end point to get Video by Title.
 app.get("/videoByTitle", getVideoByTitle);
+
+app.get("/getFreq", getFreq);

@@ -2,6 +2,8 @@ import pg from "pg";
 const { Pool } = pg;
 import dotenv from "dotenv";
 dotenv.config();
+import moment from "moment";
+import { sortThemByFrequency } from "../controller/video.js";
 
 // Details to connect with PostgreSQL Database.
 const pool = new Pool({
@@ -39,6 +41,21 @@ export const getVideoByTitle = (req, res) => {
         throw error;
       }
       res.status(200).json(results.rows);
+    }
+  );
+};
+export const getFreq = (req, res) => {
+  let currentDate = moment(Date.now()).subtract(1, "h");
+  currentDate = currentDate.format("YYYY-MM-DD HH:mm:ss").toString();
+  //console.log(typeof currentDate);
+  pool.query(
+    `SELECT title FROM ytvideo WHERE date >= '${currentDate}'`,
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      let maxWord = sortThemByFrequency(results.rows);
+      res.status(200).json(maxWord);
     }
   );
 };
